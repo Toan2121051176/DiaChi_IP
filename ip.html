@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Kiểm tra địa chỉ IP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005f99;
+    }
+    .ip-result {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 Kiểm tra địa chỉ IP công cộng</h1>
+  <button onclick="getIP()">Lấy địa chỉ IP</button>
+  <div class="ip-result" id="ip-result"></div>
+
+  <script>
+    function getIP() {
+      document.getElementById('ip-result').textContent = 'Đang lấy địa chỉ IP...';
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('ip-result').textContent = '🌐 Địa chỉ IP của bạn là: ' + data.ip;
+        })
+        .catch(() => {
+          document.getElementById('ip-result').textContent = '❌ Không thể lấy địa chỉ IP.';
+        });
+    }
+  </script>
+</body>
+</html>
